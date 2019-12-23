@@ -29,6 +29,10 @@
 
 #include "App.h"
 #include "DB.h"
+#ifdef RPI
+#include <wiringPi.h>
+#define GPIO18 18
+#endif
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
@@ -166,6 +170,9 @@ HAPError HandleLightBulbOnWrite(
         bool value,
         void* _Nullable context HAP_UNUSED) {
     HAPLogInfo(&kHAPLog_Default, "%s: %s", __func__, value ? "true" : "false");
+#ifdef RPI
+    digitalWrite(GPIO18, value ? 1 : 0);
+#endif
     if (accessoryConfiguration.state.lightBulbOn != value) {
         accessoryConfiguration.state.lightBulbOn = value;
 
@@ -229,7 +236,7 @@ void AccessoryServerHandleUpdatedState(HAPAccessoryServerRef* server, void* _Nul
         }
     }
     HAPFatalError();
-}
+}         
 
 const HAPAccessory* AppGetAccessoryInfo() {
     return &accessory;
@@ -239,7 +246,12 @@ void AppInitialize(
         HAPAccessoryServerOptions* hapAccessoryServerOptions,
         HAPPlatform* hapPlatform,
         HAPAccessoryServerCallbacks* hapAccessoryServerCallbacks) {
-    /*no-op*/
+#ifdef RPI
+        // Initialize WiringPi
+        if(wiringPiSetupGpio() != -1){
+            pinMode(GPIO18, OUTPUT);
+        }
+#endif
 }
 
 void AppDeinitialize() {
