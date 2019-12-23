@@ -26,4 +26,4 @@ LINK_END_Raspi := -Wl,--end-group
 
 SKIPPED_TESTS_Raspi := HAPExhaustiveUTF8Test
 
-PROTOCOLS_Raspi := BLE
+PROTOCOLS_Raspi := IP
