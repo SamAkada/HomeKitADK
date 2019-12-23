@@ -41,7 +41,7 @@ make USE_NFC=1 all
 
 #### Run
 ```
-./Output/Darwin-x86_64-apple-darwin18.6.0/Debug/IP/Applications/Lightbulb.OpenSSL
+./Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL
 ```
 
 *NOTE:* We use the OpenSSL crypto backend by default on Darwin. You can select a different crypto module:
@@ -86,5 +86,7 @@ If docker doesn't find "dev-test/raspiadk-base", run the sdcard setup and make s
     -d raspi \
     -a Output/Raspi-armv6k-unknown-linux-gnueabihf/Debug/IP/Applications/Lightbulb.OpenSSL \
     -n raspberrypi \
-    -p pi
+    -p raspberry
 ```
+### Setup code:111-22-333
+
