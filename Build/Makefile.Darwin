@@ -37,4 +37,4 @@ EXCLUDE_Darwin := \
 
 SKIPPED_TESTS_Darwin := HAPExhaustiveUTF8Test
 
-PROTOCOLS_Darwin := IP BLE
+PROTOCOLS_Darwin := IP

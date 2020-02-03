@@ -33,6 +33,9 @@
 #include <wiringPi.h>
 #define GPIO18 18
 #endif
+#ifdef DARWIN
+#include <stdlib.h>
+#endif
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
@@ -172,6 +175,13 @@ HAPError HandleLightBulbOnWrite(
     HAPLogInfo(&kHAPLog_Default, "%s: %s", __func__, value ? "true" : "false");
 #ifdef RPI
     digitalWrite(GPIO18, value ? 1 : 0);
+#endif
+#ifdef DARWIN
+    if (value) {
+        system("./handleLightBulbOn");
+    }else{
+        system("./handleLightBulbOff");        
+    }
 #endif
     if (accessoryConfiguration.state.lightBulbOn != value) {
         accessoryConfiguration.state.lightBulbOn = value;
